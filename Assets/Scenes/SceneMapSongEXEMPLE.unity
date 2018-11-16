@@ -222,7 +222,7 @@ Prefab:
     - target: {fileID: 114234001096810800, guid: b1cb2e7471c8a534786a6c2ec9f522f5,
         type: 2}
       propertyPath: hideSubGridAtStart
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114234001096810800, guid: b1cb2e7471c8a534786a6c2ec9f522f5,
         type: 2}
@@ -234,6 +234,16 @@ Prefab:
       propertyPath: music
       value: 
       objectReference: {fileID: 8300000, guid: 095c952e505b38941ae08ed9ddaa5247, type: 3}
+    - target: {fileID: 114234001096810800, guid: b1cb2e7471c8a534786a6c2ec9f522f5,
+        type: 2}
+      propertyPath: BeatPerMinute
+      value: 101
+      objectReference: {fileID: 0}
+    - target: {fileID: 114234001096810800, guid: b1cb2e7471c8a534786a6c2ec9f522f5,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1cb2e7471c8a534786a6c2ec9f522f5, type: 2}
   m_IsPrefabAsset: 0
@@ -415,7 +425,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 095c952e505b38941ae08ed9ddaa5247, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7751ba15e5998854c92ad240b61e94d3, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
