@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33426427599505644}
   - component: {fileID: 23986833077199008}
   - component: {fileID: 136711941408055264}
+  - component: {fileID: 114229596581163334}
   m_Layer: 0
   m_Name: Saber
   m_TagString: Untagged
@@ -84,6 +85,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1061801431984180}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114229596581163334
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1061801431984180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0dd03c22fc95a847b7413c314b1f66e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &136711941408055264
 CapsuleCollider:
   m_ObjectHideFlags: 1
