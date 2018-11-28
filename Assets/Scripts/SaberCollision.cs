@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hit : MonoBehaviour {
+public class SaberCollision : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
         var target = collision.gameObject;
 
-        Debug.Log("Collision détéctée");
         if (target.name == "Cube")
         {
             Destroy(target);
