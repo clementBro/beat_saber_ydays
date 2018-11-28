@@ -41,7 +41,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
-# SteamVR
-Assets/SteamVR
-
 # End of https://www.gitignore.io/api/unity
