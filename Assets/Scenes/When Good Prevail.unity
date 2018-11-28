@@ -155,7 +155,7 @@ Prefab:
     - target: {fileID: 114774030294854420, guid: 91532ab62f082f2469d5b881989050a0,
         type: 2}
       propertyPath: offsetDuree
-      value: 60
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 114774030294854420, guid: 91532ab62f082f2469d5b881989050a0,
         type: 2}
