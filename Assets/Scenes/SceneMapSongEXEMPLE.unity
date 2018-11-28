@@ -152,6 +152,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 82409879086857150, guid: b1cb2e7471c8a534786a6c2ec9f522f5,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114234001096810800, guid: b1cb2e7471c8a534786a6c2ec9f522f5,
+        type: 2}
+      propertyPath: BeatPerMinute
+      value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 114234001096810800, guid: b1cb2e7471c8a534786a6c2ec9f522f5,
+        type: 2}
+      propertyPath: offsetDuree
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1cb2e7471c8a534786a6c2ec9f522f5, type: 2}
   m_IsPrefabAsset: 0

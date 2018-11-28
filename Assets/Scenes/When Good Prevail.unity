@@ -152,6 +152,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114774030294854420, guid: 91532ab62f082f2469d5b881989050a0,
+        type: 2}
+      propertyPath: offsetDuree
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 114774030294854420, guid: 91532ab62f082f2469d5b881989050a0,
+        type: 2}
+      propertyPath: hideSubGridAtStart
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91532ab62f082f2469d5b881989050a0, type: 2}
   m_IsPrefabAsset: 0
