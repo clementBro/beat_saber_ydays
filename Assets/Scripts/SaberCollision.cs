@@ -8,7 +8,7 @@ public class SaberCollision : MonoBehaviour {
     {
         var target = collision.gameObject;
 
-        if (target.name == "Cube")
+        if (target.name == "Target")
         {
             Destroy(target);
             Debug.Log("Le GameObject '" + target.name + "' a été détruit");
