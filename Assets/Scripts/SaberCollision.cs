@@ -8,10 +8,10 @@ public class SaberCollision : MonoBehaviour {
     {
         var target = collision.gameObject;
 
-        if (target.name == "Target")
+        if (target.tag == "Target")
         {
             Destroy(target);
-            Debug.Log("Le GameObject '" + target.name + "' a été détruit");
+            Debug.Log("Le GameObject '" + target.tag + "' a été détruit");
         }
     }
 }
