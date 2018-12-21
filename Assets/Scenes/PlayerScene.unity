@@ -6246,8 +6246,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 15, y: 7, z: 1}
-  m_Center: {x: 0, y: 3, z: 0}
+  m_Size: {x: 1.25, y: 0.5, z: 0.05}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &1397874896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6636,15 +6636,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: b6dac73c93b1c7740973ae500e61a1f0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: b6dac73c93b1c7740973ae500e61a1f0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: b6dac73c93b1c7740973ae500e61a1f0, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: b6dac73c93b1c7740973ae500e61a1f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
