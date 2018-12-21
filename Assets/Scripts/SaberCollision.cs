@@ -20,6 +20,7 @@ public class SaberCollision : MonoBehaviour {
             }
 
             GameManager.score += 1 * GameManager.combo;
+            Debug.Log("Score : " + GameManager.score + " ,Combo : " + GameManager.combo);
         }
     }
 }
