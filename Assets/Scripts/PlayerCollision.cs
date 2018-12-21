@@ -16,7 +16,7 @@ public class PlayerCollision : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Target")
+        if (collision.gameObject.tag == "Target")
         {
             Debug.Log("Joueur touché");
             Destroy(collision.gameObject);
