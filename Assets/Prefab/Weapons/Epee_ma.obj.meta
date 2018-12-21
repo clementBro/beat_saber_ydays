@@ -1,28 +1,16 @@
 fileFormatVersion: 2
-guid: b6dac73c93b1c7740973ae500e61a1f0
+guid: eee34e757fa03c449be7b5903a6eb02e
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: pCube3_Saber
+    100000: epee_ma
     100002: //RootNode
-    100004: Saber_pCylinder1
-    100006: Saber_revolvedSurface1
-    400000: pCube3_Saber
+    400000: epee_ma
     400002: //RootNode
-    400004: Saber_pCylinder1
-    400006: Saber_revolvedSurface1
-    2100000: pCube3_SaberMat
-    2100002: Saber_pCylinder1Mat
-    2100004: Saber_revolvedSurface1Mat
-    2300000: pCube3_Saber
-    2300002: Saber_pCylinder1
-    2300004: Saber_revolvedSurface1
-    3300000: pCube3_Saber
-    3300002: Saber_pCylinder1
-    3300004: Saber_revolvedSurface1
-    4300000: pCube3_Saber
-    4300002: Saber_pCylinder1
-    4300004: Saber_revolvedSurface1
+    2100000: epee_maMat
+    2300000: epee_ma
+    3300000: epee_ma
+    4300000: epee_ma
   externalObjects: {}
   materials:
     importMaterials: 1
