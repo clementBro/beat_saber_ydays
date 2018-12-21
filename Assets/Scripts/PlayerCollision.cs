@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -16,10 +16,11 @@ public class PlayerCollision : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Cube")
+        if (collision.gameObject.tag == "Target")
         {
             Debug.Log("Joueur touché");
             Destroy(collision.gameObject);
+            GameManager.combo = 0;
         }
     }
 }
