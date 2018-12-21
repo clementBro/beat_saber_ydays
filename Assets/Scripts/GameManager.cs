@@ -4,31 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-    private long score = 0;
-    public long Score
-    {
-        get
-        {
-            return score;
-        }
-        set
-        {
-            score = value;
-        }
-    }
+    public static long score = 0;
+    public static int combo = 0;
 
-    private int combo = 0;
-    public int Combo
-    {
-        get
-        {
-            return combo;
-        }
-        set
-        {
-            combo = value;
-        }
-    }
 
     // Use this for initialization
     void Start () {

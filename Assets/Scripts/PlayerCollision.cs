@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour {
-    
-    private GameManager gameManager = new GameManager();
 
     // Use this for initialization
     void Start () {
@@ -22,7 +20,7 @@ public class PlayerCollision : MonoBehaviour {
         {
             Debug.Log("Joueur touché");
             Destroy(collision.gameObject);
-            gameManager.Combo = 0;
+            GameManager.combo = 0;
         }
     }
 }
