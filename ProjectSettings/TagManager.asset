@@ -6,6 +6,8 @@ TagManager:
   tags:
   - SubGrid
   - Target
+  - TargetUp
+  - TargetDown
   layers:
   - Default
   - TransparentFX
