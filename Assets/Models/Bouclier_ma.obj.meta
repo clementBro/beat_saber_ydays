@@ -1,16 +1,22 @@
 fileFormatVersion: 2
-guid: 70c8172b9e71dc04287a3993af47677c
+guid: 77f9ecfe9c4ae8941ae1d68c82e155b5
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: bouclier
-    100002: //RootNode
-    400000: bouclier
-    400002: //RootNode
-    2100000: bouclierMat
-    2300000: bouclier
-    3300000: bouclier
-    4300000: bouclier
+    100000: //RootNode
+    100002: poign_1
+    100004: bouclier
+    400000: //RootNode
+    400002: poign_1
+    400004: bouclier
+    2100000: poign_1Mat
+    2100002: bouclierMat
+    2300000: poign_1
+    2300002: bouclier
+    3300000: poign_1
+    3300002: bouclier
+    4300000: poign_1
+    4300002: bouclier
   externalObjects: {}
   materials:
     importMaterials: 1
