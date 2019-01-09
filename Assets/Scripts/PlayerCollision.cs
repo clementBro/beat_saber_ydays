@@ -26,7 +26,7 @@ public class PlayerCollision : MonoBehaviour {
             Destroy(collision.gameObject);
 
             GameManager.combo = 0;
-            combo.text = GameManager.combo.ToString();
+            combo.text = "1";
         }
     }
 }
