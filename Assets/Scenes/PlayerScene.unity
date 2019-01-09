@@ -888,6 +888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f566530daa29e943baa635a46ae5dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combo: {fileID: 438751955}
 --- !u!4 &208514103
 Transform:
   m_ObjectHideFlags: 0
@@ -8447,6 +8448,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6694ed2ea4205ec408c5ca8a07fb7f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: {fileID: 1385288585}
+  combo: {fileID: 438751955}
 --- !u!1 &1816472741 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1035400649976610, guid: 91532ab62f082f2469d5b881989050a0,
@@ -9366,6 +9369,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6694ed2ea4205ec408c5ca8a07fb7f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: {fileID: 1385288585}
+  combo: {fileID: 438751955}
 --- !u!1 &2112963567
 GameObject:
   m_ObjectHideFlags: 0

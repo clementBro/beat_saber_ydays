@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SaberCollision : MonoBehaviour {
 
+
+    public Text score;
+    public Text combo;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -21,6 +25,9 @@ public class SaberCollision : MonoBehaviour {
 
             GameManager.score += 1 * GameManager.combo;
             Debug.Log("Score : " + GameManager.score + " ,Combo : " + GameManager.combo);
+
+            score.text = GameManager.score.ToString();
+            combo.text = GameManager.combo.ToString();
         }
     }
 }
