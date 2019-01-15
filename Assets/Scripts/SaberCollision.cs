@@ -15,7 +15,7 @@ public class SaberCollision : MonoBehaviour {
 
         if (target.tag == "Target")
         {
-            Destroy(target);
+            Destroy(target.transform.parent);
             Debug.Log("Le GameObject '" + target.tag + "' a été détruit");
 
             if (GameManager.combo < 8)
