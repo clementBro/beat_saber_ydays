@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCollision : MonoBehaviour {
 
+    
+    public Text combo;
+    
     // Use this for initialization
     void Start () {
 		
@@ -20,7 +24,9 @@ public class PlayerCollision : MonoBehaviour {
         {
             Debug.Log("Joueur touché");
             Destroy(collision.gameObject);
+
             GameManager.combo = 0;
+            combo.text = "1";
         }
     }
 }
