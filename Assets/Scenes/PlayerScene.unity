@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 6424178eca596f64f87e088c12bd5f2c, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.19289371, g: 0.13844411, b: 0.112466805, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1369,6 +1369,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60486705b19b4a44ab87a99af55af3fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &328466101 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1149845401512000, guid: 43ce4636b7e6f4046bbd13b4b2c62e4c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1695841700}
+--- !u!65 &328466102
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 328466101}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.119606376, y: 1.5743532, z: 0.81615084}
+  m_Center: {x: 0.00083714724, y: 0.7620113, z: 0.0046665967}
 --- !u!1 &339532734 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1351009247475286, guid: 91532ab62f082f2469d5b881989050a0,
@@ -2723,7 +2740,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4344060493162640, guid: 9f7cc76de699d06459d5b00b47d66a22, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4344060493162640, guid: 9f7cc76de699d06459d5b00b47d66a22, type: 2}
       propertyPath: m_LocalRotation.z
@@ -2731,15 +2748,40 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4344060493162640, guid: 9f7cc76de699d06459d5b00b47d66a22, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4344060493162640, guid: 9f7cc76de699d06459d5b00b47d66a22, type: 2}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4344060493162640, guid: 9f7cc76de699d06459d5b00b47d66a22, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115010901571352, guid: 9f7cc76de699d06459d5b00b47d66a22, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f7cc76de699d06459d5b00b47d66a22, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &681901084 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1115010901571352, guid: 9f7cc76de699d06459d5b00b47d66a22,
+    type: 2}
+  m_PrefabInternal: {fileID: 681901083}
+--- !u!65 &681901085
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 681901084}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.039905787, y: 2.067231, z: 0.11991593}
+  m_Center: {x: 0.003008604, y: 1.0324916, z: -0.024729326}
 --- !u!1 &714135643 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1714552268108296, guid: 91532ab62f082f2469d5b881989050a0,
@@ -7430,6 +7472,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4984353747808408, guid: 43ce4636b7e6f4046bbd13b4b2c62e4c, type: 2}
       propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149845401512000, guid: 43ce4636b7e6f4046bbd13b4b2c62e4c, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
