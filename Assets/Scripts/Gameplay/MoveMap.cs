@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,8 @@ public class MoveMap : MonoBehaviour
     public int BeatPerMinute;
     public bool hideSubGridAtStart;
     public int offsetDuree;
-    
+    public bool exportToJson;
+
     /// <summary>
     /// La musique attachée au GameObject
     /// </summary>
@@ -45,11 +47,28 @@ public class MoveMap : MonoBehaviour
 
             Camera.main.transform.position = cameraPosition;
         }
+
+        // si on veut transformer la musique en fichier Json
+        if (exportToJson)
+        {
+            CreateJson();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         this.transform.Translate(Vector3.back * Time.deltaTime * BeatPerMinute * CONSTANT);
+    }
+
+    /// <summary>
+    /// Transforme la musique en fichier Json
+    /// </summary>
+    private void CreateJson()
+    {
+        // On récupère les cibles
+        GameObject[] notes = GameObject.FindGameObjectsWithTag("Target");
+
+
     }
 }
