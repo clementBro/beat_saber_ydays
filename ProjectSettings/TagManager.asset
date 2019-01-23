@@ -8,6 +8,8 @@ TagManager:
   - Target
   - Score
   - Combo
+  - Rouge
+  - Vert
   layers:
   - Default
   - TransparentFX

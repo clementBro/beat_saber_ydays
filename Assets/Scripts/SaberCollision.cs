@@ -13,21 +13,27 @@ public class SaberCollision : MonoBehaviour {
     {
         var target = collision.gameObject;
 
-        if (target.tag == "Target")
+        if (target.tag == "Vert")
         {
-            Destroy(target.transform.parent);
             Debug.Log("Le GameObject '" + target.tag + "' a été détruit");
 
             if (GameManager.combo < 8)
             {
                 GameManager.combo = GameManager.combo + 1;
             }
-
             GameManager.score += 1 * GameManager.combo;
-            Debug.Log("Score : " + GameManager.score + " ,Combo : " + GameManager.combo);
 
-            score.text = GameManager.score.ToString();
-            combo.text = GameManager.combo.ToString();
+        } else if (target.tag == "Rouge")
+        {
+            GameManager.combo = 0;
+            combo.text = "1";
         }
+
+        Destroy(target);
+
+        Debug.Log("Score : " + GameManager.score + " ,Combo : " + GameManager.combo);
+
+        score.text = GameManager.score.ToString();
+        combo.text = GameManager.combo.ToString();
     }
 }
