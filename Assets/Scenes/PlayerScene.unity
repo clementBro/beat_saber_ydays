@@ -2741,6 +2741,10 @@ Prefab:
       propertyPath: m_Name
       value: Blade
       objectReference: {fileID: 0}
+    - target: {fileID: 1217972096447036, guid: c01d68b5f234ea748b5ef445a665f1a6, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c01d68b5f234ea748b5ef445a665f1a6, type: 2}
   m_IsPrefabAsset: 0
@@ -7439,6 +7443,10 @@ Prefab:
     - target: {fileID: 1831086745857534, guid: 10c39fe1efc994747b8e4e9cc217c1e3, type: 2}
       propertyPath: m_Name
       value: Hache
+      objectReference: {fileID: 0}
+    - target: {fileID: 1831086745857534, guid: 10c39fe1efc994747b8e4e9cc217c1e3, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10c39fe1efc994747b8e4e9cc217c1e3, type: 2}
