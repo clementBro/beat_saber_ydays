@@ -11,6 +11,8 @@ public class SaberCollision : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("OnCollision : " + collision);
+
         var target = collision.gameObject;
 
         if (target.tag == "Vert")
@@ -25,11 +27,10 @@ public class SaberCollision : MonoBehaviour {
 
         } else if (target.tag == "Rouge")
         {
-            GameManager.combo = 0;
-            combo.text = "1";
+            GameManager.combo = 1;
         }
 
-        Destroy(target);
+        Destroy(target.transform.parent.gameObject);
 
         Debug.Log("Score : " + GameManager.score + " ,Combo : " + GameManager.combo);
 
