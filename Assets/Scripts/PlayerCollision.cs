@@ -20,10 +20,10 @@ public class PlayerCollision : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Target")
+        if (collision.gameObject.tag == "Rouge" || collision.gameObject.tag == "Vert")
         {
             Debug.Log("Joueur touché");
-            Destroy(collision.gameObject);
+            Destroy(collision.transform.parent.gameObject);
 
             GameManager.combo = 0;
             combo.text = "1";

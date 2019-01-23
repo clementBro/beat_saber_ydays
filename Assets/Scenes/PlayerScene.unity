@@ -767,7 +767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f566530daa29e943baa635a46ae5dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combo: {fileID: 0}
+  combo: {fileID: 1333447529}
 --- !u!4 &208514103
 Transform:
   m_ObjectHideFlags: 0
@@ -2756,6 +2756,18 @@ Prefab:
       propertyPath: combo
       value: 
       objectReference: {fileID: 1333447529}
+    - target: {fileID: 4966438788175246, guid: c01d68b5f234ea748b5ef445a665f1a6, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966438788175246, guid: c01d68b5f234ea748b5ef445a665f1a6, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966438788175246, guid: c01d68b5f234ea748b5ef445a665f1a6, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c01d68b5f234ea748b5ef445a665f1a6, type: 2}
   m_IsPrefabAsset: 0
@@ -4642,7 +4654,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4876135589923312, guid: 91532ab62f082f2469d5b881989050a0, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4876135589923312, guid: 91532ab62f082f2469d5b881989050a0, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4684,11 +4696,11 @@ Prefab:
     - target: {fileID: 114774030294854420, guid: 91532ab62f082f2469d5b881989050a0,
         type: 2}
       propertyPath: hideSubGridAtStart
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1511107122207184, guid: 91532ab62f082f2469d5b881989050a0, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1994880872190898, guid: 91532ab62f082f2469d5b881989050a0, type: 2}
       propertyPath: m_TagString
@@ -7581,6 +7593,18 @@ Prefab:
       propertyPath: combo
       value: 
       objectReference: {fileID: 1333447529}
+    - target: {fileID: 4187208715001766, guid: 10c39fe1efc994747b8e4e9cc217c1e3, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4187208715001766, guid: 10c39fe1efc994747b8e4e9cc217c1e3, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4187208715001766, guid: 10c39fe1efc994747b8e4e9cc217c1e3, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10c39fe1efc994747b8e4e9cc217c1e3, type: 2}
   m_IsPrefabAsset: 0
