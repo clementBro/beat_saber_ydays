@@ -12,6 +12,8 @@ TagManager:
   - Score
   - Rouge
   - Vert
+  - FirstCut
+  - SecondCut
   layers:
   - Default
   - TransparentFX
