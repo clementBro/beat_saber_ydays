@@ -31,6 +31,6 @@ public class SaberCollision : MonoBehaviour {
         score.text = GameManager.score.ToString();
         combo.text = GameManager.combo.ToString();
 
-        Debug.Log("Score : " + GameManager.score + ", Combo : " + GameManager.combo);
+        Debug.Log("Cible cassée (Score : " + GameManager.score + ", Combo : " + GameManager.combo + ")");
     }
 }

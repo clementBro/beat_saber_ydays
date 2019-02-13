@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4793225385076338}
   m_Layer: 0
   m_Name: Target blue left
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,6 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4232691197420594}
   - component: {fileID: 65218879145040786}
+  - component: {fileID: 54895596868661312}
   m_Layer: 0
   m_Name: FirstCut
   m_TagString: FirstCut
@@ -85,6 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4261285060423164}
   - component: {fileID: 65296933506356798}
+  - component: {fileID: 54507663413635798}
   m_Layer: 0
   m_Name: SecondCut
   m_TagString: SecondCut
@@ -182,7 +184,7 @@ Transform:
   m_GameObject: {fileID: 1398131577678774}
   m_LocalRotation: {x: 0.7071068, y: -0.7071068, z: -0.00000019861236, w: 0.00000019861236}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 4494386054441088}
   - {fileID: 4041287999835236}
@@ -318,6 +320,36 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1090645319254336}
   m_Mesh: {fileID: 4300000, guid: a09f251567613e948915e19cbf705f10, type: 3}
+--- !u!54 &54507663413635798
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1763645695134348}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &54895596868661312
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1641725587340988}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65218879145040786
 BoxCollider:
   m_ObjectHideFlags: 1
