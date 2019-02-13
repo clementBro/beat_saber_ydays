@@ -6,10 +6,21 @@ TagManager:
   tags:
   - SubGrid
   - Target
+<<<<<<< HEAD
   - Score
   - Combo
   - Rouge
   - Vert
+=======
+  - TargetUp
+  - TargetDown
+  - Combo
+  - Score
+  - Rouge
+  - Vert
+  - FirstCut
+  - SecondCut
+>>>>>>> targets
   layers:
   - Default
   - TransparentFX
