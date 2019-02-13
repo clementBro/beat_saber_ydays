@@ -9,14 +9,10 @@ public class PlayerCollision : MonoBehaviour {
     public Text combo;
     
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start () {}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update () {}
 
     private void OnCollisionEnter(Collision collision)
     {
