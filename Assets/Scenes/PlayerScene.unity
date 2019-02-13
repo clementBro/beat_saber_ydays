@@ -8923,6 +8923,10 @@ Prefab:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1511107122207184, guid: 91532ab62f082f2469d5b881989050a0, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114821759887322716, guid: 91532ab62f082f2469d5b881989050a0, type: 2}
     - {fileID: 114173589672253998, guid: 91532ab62f082f2469d5b881989050a0, type: 2}
