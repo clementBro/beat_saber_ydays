@@ -14,11 +14,11 @@ public class SaberCollision : MonoBehaviour {
 
         if (target.tag == "FirstCut") // Si le target a été cassé dans le bon sens
         {
+            GameManager.score += 1 * GameManager.combo;
             if (GameManager.combo < 8)
             {
                 GameManager.combo = GameManager.combo + 1;
             }
-            GameManager.score += 1 * GameManager.combo;
         }
         else if (target.tag == "SecondCut") // Si le target n'a pas été cassé dans le bon sens
         {
