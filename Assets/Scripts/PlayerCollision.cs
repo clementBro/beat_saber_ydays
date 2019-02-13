@@ -20,13 +20,17 @@ public class PlayerCollision : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Rouge" || collision.gameObject.tag == "Vert")
-        {
-            Debug.Log("Joueur touché");
-            Destroy(collision.transform.parent.gameObject);
+        var target = collision.gameObject;
 
-            GameManager.combo = 0;
-            combo.text = "1";
+        if (target.tag == "FirstCut" || target.tag == "SecondCut")
+        {
+            Destroy(target.transform.parent.gameObject); // Destruction du target
+
+            // Mise à jour du combo
+            GameManager.combo = 1;
+            combo.text = GameManager.combo.ToString();
+
+            Debug.Log("Joueur touché");
         }
     }
 }
