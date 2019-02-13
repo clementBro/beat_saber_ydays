@@ -6,6 +6,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Assets.Scripts.Entities;
+using System;
 
 public class MoveMap : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class MoveMap : MonoBehaviour
     public bool hideSubGridAtStart;
     public int offsetDuree;
     public bool exportToJson;
+
+    public bool loadMusic;
+    public string musicName;
 
     /// <summary>
     /// La musique attachée au GameObject
@@ -52,8 +56,13 @@ public class MoveMap : MonoBehaviour
             Camera.main.transform.position = cameraPosition;
         }
 
+        // Si on veut charger une musique
+        if (loadMusic)
+        {
+            LoadMusic(musicName);
+        }
         // si on veut transformer la musique en fichier Json
-        if (exportToJson)
+        else if (exportToJson)
         {
             CreateJson();
         }
@@ -74,11 +83,8 @@ public class MoveMap : MonoBehaviour
         List<GameObject> targets = GameObject.FindGameObjectsWithTag("Target").ToList();
         targets = targets.OrderBy(note => note.transform.position.z).ToList();
 
-        //Scene.name;
         DirectoryInfo jsonDirectory = new DirectoryInfo("Assets/JSON/JsonMusic");
-
         Scene scene = SceneManager.GetActiveScene();
-
         List<FileInfo> jsonFiles = jsonDirectory.GetFiles().ToList();
 
         // Si le json existe déjà on le supprime
@@ -117,5 +123,60 @@ public class MoveMap : MonoBehaviour
         UnicodeEncoding uniEncoding = new UnicodeEncoding();
         fs.Write(uniEncoding.GetBytes(jsonMusic), 0, uniEncoding.GetByteCount(jsonMusic));
         fs.Close();
+    }
+
+    /// <summary>
+    /// Charge une musique à partir d'un Json
+    /// </summary>
+    private void LoadMusic(string music)
+    {
+        DirectoryInfo jsonDirectory = new DirectoryInfo("Assets/JSON/JsonMusic");
+
+        if (!File.Exists(jsonDirectory + "/" + music + ".json"))
+        {
+            Debug.Log("La musique '" + music + "' n'a pas été trouvée.");
+            return;
+        }
+
+        string fileData = ReadFileToString(jsonDirectory + "/" + music + ".json");
+
+        JsonEntities.DataToSave dataToLoad = JsonConvert.DeserializeObject<JsonEntities.DataToSave>(fileData);
+
+
+    }
+
+    /// <summary>
+    /// Lit un fichier et retourne son contenue en string
+    /// </summary>
+    /// <param name="v"></param>
+    /// <returns></returns>
+    private string ReadFileToString(string file)
+    {
+        using (FileStream fsSource = new FileStream(file, FileMode.Open, FileAccess.Read))
+        {
+            // Read the source file into a byte array.
+            byte[] bytes = new byte[fsSource.Length];
+            int numBytesToRead = (int)fsSource.Length;
+            int numBytesRead = 0;
+            while (numBytesToRead > 0)
+            {
+                // Read may return anything from 0 to numBytesToRead.
+                int n = fsSource.Read(bytes, numBytesRead, numBytesToRead);
+
+                // Break when the end of the file is reached.
+                if (n == 0)
+                    break;
+
+                numBytesRead += n;
+                numBytesToRead -= n;
+            }
+            numBytesToRead = bytes.Length;
+
+
+            UnicodeEncoding uniEncoding = new UnicodeEncoding();
+
+
+            return uniEncoding.GetString(bytes);
+        }
     }
 }
