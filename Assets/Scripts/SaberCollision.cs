@@ -17,12 +17,14 @@ public class SaberCollision : MonoBehaviour {
             GameManager.score += 1 * GameManager.combo;
             if (GameManager.combo < 8)
             {
-                GameManager.combo = GameManager.combo + 1;
+                GameManager.combo++;
             }
+            Debug.Log('Bon sens');
         }
         else if (target.tag == "SecondCut") // Si le target n'a pas été cassé dans le bon sens
         {
             GameManager.combo = 1;
+            Debug.Log('Mauvais sens');
         }
 
         Destroy(target.transform.parent.gameObject); // Destruction du target
