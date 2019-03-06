@@ -28,7 +28,7 @@ public class SaberCollision : MonoBehaviour {
             Debug.Log("Mauvais sens");
         }
 
-        Destroy(target.transform.parent.gameObject); // Destruction du target
+        DestroyImmediate(target.transform.parent.gameObject); // Destruction du target
 
         // Mise à jour du score et du combo
         score.text = GameManager.score.ToString();
