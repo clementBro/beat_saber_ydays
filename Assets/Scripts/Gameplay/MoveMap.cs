@@ -16,14 +16,18 @@ public class MoveMap : MonoBehaviour
     public int offsetDuree;
     public bool exportToJson;
 
-    public bool loadMusic;
+    public bool loadMusicFromJson;
     public string musicName;
+
+    public GameObject prefabNote;
 
     /// <summary>
     /// La musique attachée au GameObject
     /// </summary>
     private AudioSource music;
     private const float CONSTANT = 0.01665f;
+    private const float CONSTANTMOVE = 5f;
+    private const float CONSTANTPOSNOTE = 0.0134f;
 
     // Use this for initialization
     void Start()
@@ -57,9 +61,9 @@ public class MoveMap : MonoBehaviour
         }
 
         // Si on veut charger une musique
-        if (loadMusic)
+        if (loadMusicFromJson)
         {
-            LoadMusic(musicName);
+            LoadMusicFromJson(musicName);
         }
         // si on veut transformer la musique en fichier Json
         else if (exportToJson)
@@ -71,7 +75,14 @@ public class MoveMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.Translate(Vector3.back * Time.deltaTime * BeatPerMinute * CONSTANT);
+        if (loadMusicFromJson)
+        {
+            this.transform.Translate(Vector3.back * Time.deltaTime * CONSTANTMOVE);
+        }
+        else
+        {
+            this.transform.Translate(Vector3.back * Time.deltaTime * BeatPerMinute * CONSTANT);
+        }
     }
 
     /// <summary>
@@ -88,13 +99,13 @@ public class MoveMap : MonoBehaviour
         List<FileInfo> jsonFiles = jsonDirectory.GetFiles().ToList();
 
         // Si le json existe déjà on le supprime
-        if (jsonFiles.Any(file => file.Name == scene.name + ".json"))
+        if (jsonFiles.Any(file => file.Name == musicName + ".json"))
         {
-            jsonFiles.Where(file => file.Name == scene.name + ".json").First().Delete();
+            jsonFiles.Where(file => file.Name == musicName + ".json").First().Delete();
         }
 
         // On crée le répertoire
-        FileStream fs = File.Create(jsonDirectory + "/" + scene.name + ".json");
+        FileStream fs = File.Create(jsonDirectory + "/" + musicName + ".json");
 
         JsonEntities.DataToSave dataToSave = new JsonEntities.DataToSave();
         dataToSave.NotesToSave = new List<JsonEntities.NoteToSave>();
@@ -128,21 +139,28 @@ public class MoveMap : MonoBehaviour
     /// <summary>
     /// Charge une musique à partir d'un Json
     /// </summary>
-    private void LoadMusic(string music)
+    private void LoadMusicFromJson(string music)
     {
         DirectoryInfo jsonDirectory = new DirectoryInfo("Assets/JSON/JsonMusic");
 
+        // Si on ne trouve pas la musique
         if (!File.Exists(jsonDirectory + "/" + music + ".json"))
         {
             Debug.Log("La musique '" + music + "' n'a pas été trouvée.");
             return;
         }
 
+        // Récupère le json de la musique
         string fileData = ReadFileToString(jsonDirectory + "/" + music + ".json");
 
+        // Récupère les infos de la musique
         JsonEntities.DataToSave dataToLoad = JsonConvert.DeserializeObject<JsonEntities.DataToSave>(fileData);
 
-
+        // AJOUT DES NOTES SUR LA PISTE
+        foreach(var note in dataToLoad.NotesToSave)
+        {
+            Instantiate(prefabNote, new Vector3(note.PositionX, note.PositionY, note.PositionZ * dataToLoad.BPM * CONSTANTPOSNOTE), new Quaternion(0, 0, note.RotationZ, 0), this.transform);
+        }
     }
 
     /// <summary>

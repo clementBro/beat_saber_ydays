@@ -162,6 +162,27 @@ Prefab:
       propertyPath: musicName
       value: When Good Prevail
       objectReference: {fileID: 0}
+    - target: {fileID: 114234001096810800, guid: b1cb2e7471c8a534786a6c2ec9f522f5,
+        type: 2}
+      propertyPath: loadMusicFromJson
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114234001096810800, guid: b1cb2e7471c8a534786a6c2ec9f522f5,
+        type: 2}
+      propertyPath: prefabNote
+      value: 
+      objectReference: {fileID: 1755685984340620, guid: 2938cf8523351074a892fcbd3a588bec,
+        type: 2}
+    - target: {fileID: 114234001096810800, guid: b1cb2e7471c8a534786a6c2ec9f522f5,
+        type: 2}
+      propertyPath: offsetDuree
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82409879086857150, guid: b1cb2e7471c8a534786a6c2ec9f522f5,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 095c952e505b38941ae08ed9ddaa5247, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1cb2e7471c8a534786a6c2ec9f522f5, type: 2}
   m_IsPrefabAsset: 0
