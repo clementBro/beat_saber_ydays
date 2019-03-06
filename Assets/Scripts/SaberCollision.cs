@@ -10,6 +10,7 @@ public class SaberCollision : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("---------- DEBUT CIBLE ----------");
         var target = collision.gameObject;
 
         if (target.tag == "FirstCut") // Si le target a été cassé dans le bon sens
@@ -34,5 +35,6 @@ public class SaberCollision : MonoBehaviour {
         combo.text = GameManager.combo.ToString();
 
         Debug.Log("Cible cassée (Score : " + GameManager.score + ", Combo : " + GameManager.combo + ")");
+        Debug.Log("---------- FIN CIBLE ----------");
     }
 }
