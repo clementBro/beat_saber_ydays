@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 
     public static long score = 0;
     public static int combo = 0;
+    public static Dictionary<GameObject, bool> targetStates = new Dictionary<GameObject, bool>();
 
 
     // Use this for initialization
