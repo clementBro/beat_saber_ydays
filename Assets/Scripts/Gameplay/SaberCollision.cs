@@ -1,16 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
-public class SaberCollision : MonoBehaviour {
+using Assets.Scripts.Entities;
+using System.Linq;
+using System.Text;
+using Newtonsoft.Json;
 
+
+public class SaberCollision : MonoBehaviour {
 
     public Text score;
     public Text combo;
 
-    //string chemin, jsonString;
-    //bool test = true;
+    private bool exportToJson = true;
+    private AudioSource music;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -39,25 +43,38 @@ public class SaberCollision : MonoBehaviour {
         score.text = GameManager.score.ToString();
         combo.text = GameManager.combo.ToString();
 
-        /*
-        if (test)
+        
+        if (exportToJson)
         {
-            chemin = Application.dataPath + "/JSON/JsonHighScore.json";
-            jsonString = File.ReadAllText(chemin);
+            CreateJson();
+        }
+    }
 
-            JSONHighScore myObject = JsonUtility.FromJson<JSONHighScore>(jsonString);
-            Debug.Log("test : " + myObject.musicName);
+    private void CreateJson()
+    {
+        music = this.GetComponent(typeof(AudioSource)) as AudioSource;
+        DirectoryInfo jsonDirectory = new DirectoryInfo("Assets/JSON/JsonScore");
+        List<FileInfo> jsonFiles = jsonDirectory.GetFiles().ToList();
+        // Si le json existe déjà on le supprime
+        if (jsonFiles.Any(file => file.Name == music.name + ".json"))
+        {
+            jsonFiles.Where(file => file.Name == music.name + ".json").First().Delete();
+        }
+        // On crée le répertoire
+        FileStream fs = File.Create(jsonDirectory + "/" + music.name + ".json");
 
-            myObject.musicName = "test";
-            myObject.playerName = "test";
-            myObject.highScore = GameManager.score.ToString();
+        JSONHighScore dataToSave = new JSONHighScore();
+        dataToSave.playerName = "test";
+        dataToSave.musicName = music.name;
+        dataToSave.highScore = GameManager.score.ToString();
 
-            string json = JsonUtility.ToJson(myObject);
-            File.WriteAllText(chemin, jsonString);
-            Debug.Log("test : " + myObject.highScore);
-            Debug.Log("test : " + myObject.musicName);
-            test = false;
-        }*/
+        string jsonMusic = JsonConvert.SerializeObject(dataToSave);
 
+
+        // Sauvegarde du json dans le fichier
+        UnicodeEncoding uniEncoding = new UnicodeEncoding();
+        fs.Write(uniEncoding.GetBytes(jsonMusic), 0, uniEncoding.GetByteCount(jsonMusic));
+        fs.Close();
+        exportToJson = false;
     }
 }
