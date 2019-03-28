@@ -1760,11 +1760,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4592541442502294, guid: b1cb2e7471c8a534786a6c2ec9f522f5, type: 2}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4423549279350206, guid: b1cb2e7471c8a534786a6c2ec9f522f5, type: 2}
       propertyPath: m_RootOrder
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 4122876006539748, guid: b1cb2e7471c8a534786a6c2ec9f522f5, type: 2}
       propertyPath: m_RootOrder
@@ -1772,7 +1772,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4926221612064522, guid: b1cb2e7471c8a534786a6c2ec9f522f5, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4958102469369334, guid: b1cb2e7471c8a534786a6c2ec9f522f5, type: 2}
       propertyPath: m_RootOrder
@@ -1780,7 +1780,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4905282293403844, guid: b1cb2e7471c8a534786a6c2ec9f522f5, type: 2}
       propertyPath: m_RootOrder
-      value: 24
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 4326051641006662, guid: b1cb2e7471c8a534786a6c2ec9f522f5, type: 2}
       propertyPath: m_RootOrder
@@ -1788,7 +1788,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4751578236323044, guid: b1cb2e7471c8a534786a6c2ec9f522f5, type: 2}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4483633209265128, guid: b1cb2e7471c8a534786a6c2ec9f522f5, type: 2}
       propertyPath: m_RootOrder
@@ -1800,11 +1800,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4412734578767554, guid: b1cb2e7471c8a534786a6c2ec9f522f5, type: 2}
       propertyPath: m_RootOrder
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 4400871608779796, guid: b1cb2e7471c8a534786a6c2ec9f522f5, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4510011821643266, guid: b1cb2e7471c8a534786a6c2ec9f522f5, type: 2}
       propertyPath: m_RootOrder
@@ -1812,8 +1812,24 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4485874215440176, guid: b1cb2e7471c8a534786a6c2ec9f522f5, type: 2}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 114234001096810800, guid: b1cb2e7471c8a534786a6c2ec9f522f5,
+        type: 2}
+      propertyPath: musicName
+      value: Musique Florian
+      objectReference: {fileID: 0}
+    - target: {fileID: 114234001096810800, guid: b1cb2e7471c8a534786a6c2ec9f522f5,
+        type: 2}
+      propertyPath: loadMusicFromJson
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114234001096810800, guid: b1cb2e7471c8a534786a6c2ec9f522f5,
+        type: 2}
+      propertyPath: prefabNote
+      value: 
+      objectReference: {fileID: 1157729393423292, guid: 56103b137f0c9fe42ba5506e3eb215f1,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1cb2e7471c8a534786a6c2ec9f522f5, type: 2}
   m_IsPrefabAsset: 0
