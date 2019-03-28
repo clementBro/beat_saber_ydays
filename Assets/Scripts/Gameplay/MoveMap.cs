@@ -27,7 +27,7 @@ public class MoveMap : MonoBehaviour
     private AudioSource music;
     private const float CONSTANT = 0.01665f;
     private const float CONSTANTMOVE = 5f;
-    private const float CONSTANTPOSNOTE = 0.0134f;
+    private const float CONSTANTPOSNOTE = 0.0166f;
 
     // Use this for initialization
     void Start()
@@ -159,7 +159,8 @@ public class MoveMap : MonoBehaviour
         // AJOUT DES NOTES SUR LA PISTE
         foreach(var note in dataToLoad.NotesToSave)
         {
-            Instantiate(prefabNote, new Vector3(note.PositionX, note.PositionY, note.PositionZ * dataToLoad.BPM * CONSTANTPOSNOTE), new Quaternion(0, 0, note.RotationZ, 0), this.transform);
+            Instantiate(prefabNote, new Vector3(note.PositionX, note.PositionY, (note.PositionZ * dataToLoad.BPM * CONSTANTPOSNOTE) + 2), new Quaternion(0, 0, 0, 0), this.transform)
+                .transform.Rotate(0, 0, note.RotationZ);
         }
     }
 
