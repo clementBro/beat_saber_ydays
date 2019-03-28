@@ -6,8 +6,8 @@ namespace Assets.Scripts.Entities
 {
     public class JSONHighScore
     {
-        public string musicName { get; set; }
-        public string playerName { get; set; }
-        public string highScore { get; set; }
+        public string playerName;
+        public string musicName;
+        public string highScore;
     }
 }

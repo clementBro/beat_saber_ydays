@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
 using Assets.Scripts.Entities;
-using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
-
-public class SaberCollision : MonoBehaviour {
+public class SaberCollision : MonoBehaviour
+{
 
     public Text score;
     public Text combo;
@@ -31,7 +32,8 @@ public class SaberCollision : MonoBehaviour {
             }
             GameManager.score += 1 * GameManager.combo;
 
-        } else if (target.tag == "Rouge")
+        }
+        else if (target.tag == "Rouge")
         {
             GameManager.combo = 1;
         }
@@ -43,10 +45,58 @@ public class SaberCollision : MonoBehaviour {
         score.text = GameManager.score.ToString();
         combo.text = GameManager.combo.ToString();
 
-        
+        importJson();
+
         if (exportToJson)
         {
             CreateJson();
+        }
+    }
+
+    private void importJson()
+    {
+        DirectoryInfo jsonDirectory = new DirectoryInfo("Assets/JSON/JsonScore");
+
+        // Si on ne trouve pas la musique
+        if (!File.Exists(jsonDirectory + "/test.json"))
+        {
+            Debug.Log("La musique '" + "music" + "' n'a pas été trouvée.");
+        } else {
+            // Récupère le json de la musique
+            string fileData = ReadFileToString(jsonDirectory + "/test.json");
+
+            Debug.Log("test flo /// " + fileData);
+
+            // Récupère les infos de la musique
+            JsonEntities.DataToSave dataToLoad = JsonConvert.DeserializeObject<JsonEntities.DataToSave>(fileData);
+        }
+    }
+
+    private string ReadFileToString(string file)
+    {
+        using (FileStream fsSource = new FileStream(file, FileMode.Open, FileAccess.Read))
+        {
+            // Read the source file into a byte array.
+            byte[] bytes = new byte[fsSource.Length];
+            int numBytesToRead = (int)fsSource.Length;
+            int numBytesRead = 0;
+            while (numBytesToRead > 0)
+            {
+                // Read may return anything from 0 to numBytesToRead.
+                int n = fsSource.Read(bytes, numBytesRead, numBytesToRead);
+
+                // Break when the end of the file is reached.
+                if (n == 0)
+                    break;
+
+                numBytesRead += n;
+                numBytesToRead -= n;
+            }
+            numBytesToRead = bytes.Length;
+            
+            UnicodeEncoding uniEncoding = new UnicodeEncoding();
+            
+            return uniEncoding.GetString(bytes);
         }
     }
 
@@ -56,20 +106,20 @@ public class SaberCollision : MonoBehaviour {
         DirectoryInfo jsonDirectory = new DirectoryInfo("Assets/JSON/JsonScore");
         List<FileInfo> jsonFiles = jsonDirectory.GetFiles().ToList();
         // Si le json existe déjà on le supprime
-        if (jsonFiles.Any(file => file.Name == music.name + ".json"))
+        if (jsonFiles.Any(file => file.Name == "test.json"))
         {
-            jsonFiles.Where(file => file.Name == music.name + ".json").First().Delete();
+            jsonFiles.Where(file => file.Name == "test.json").First().Delete();
         }
         // On crée le répertoire
-        FileStream fs = File.Create(jsonDirectory + "/" + music.name + ".json");
+        FileStream fs = File.Create(jsonDirectory + "/test.json");
 
         JSONHighScore dataToSave = new JSONHighScore();
-        dataToSave.playerName = "test";
-        dataToSave.musicName = music.name;
+        dataToSave.playerName = "Player";
+        dataToSave.musicName = "Musique";
         dataToSave.highScore = GameManager.score.ToString();
 
+        // Transformation de l'objet en Json
         string jsonMusic = JsonConvert.SerializeObject(dataToSave);
-
 
         // Sauvegarde du json dans le fichier
         UnicodeEncoding uniEncoding = new UnicodeEncoding();

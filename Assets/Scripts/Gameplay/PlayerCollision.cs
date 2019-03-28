@@ -28,6 +28,5 @@ public class PlayerCollision : MonoBehaviour {
             GameManager.combo = 0;
             combo.text = "1";
         }
-        
     }
 }
