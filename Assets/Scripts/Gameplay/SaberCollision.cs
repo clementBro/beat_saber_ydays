@@ -65,10 +65,9 @@ public class SaberCollision : MonoBehaviour
             // Récupère le json de la musique
             string fileData = ReadFileToString(jsonDirectory + "/test.json");
 
-            Debug.Log("test flo /// " + fileData);
-
             // Récupère les infos de la musique
-            JsonEntities.DataToSave dataToLoad = JsonConvert.DeserializeObject<JsonEntities.DataToSave>(fileData);
+            JSONHighScore dataToLoad = JsonConvert.DeserializeObject<JSONHighScore>(fileData);
+            Debug.Log("test flo /// " + dataToLoad.highScore);
         }
     }
 
