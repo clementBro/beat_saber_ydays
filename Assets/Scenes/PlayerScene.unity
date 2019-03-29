@@ -6019,6 +6019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b67a453f1c226341aef83c6c902277b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicTime: 0
 --- !u!4 &1664806757
 Transform:
   m_ObjectHideFlags: 0
@@ -8922,6 +8923,11 @@ Prefab:
         type: 2}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82188662866920252, guid: 91532ab62f082f2469d5b881989050a0,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114821759887322716, guid: 91532ab62f082f2469d5b881989050a0, type: 2}

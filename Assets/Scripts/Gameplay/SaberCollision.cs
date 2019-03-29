@@ -66,8 +66,8 @@ public class SaberCollision : MonoBehaviour
             string fileData = ReadFileToString(jsonDirectory + "/test.json");
 
             // Récupère les infos de la musique
-            JSONHighScore dataToLoad = JsonConvert.DeserializeObject<JSONHighScore>(fileData);
-            Debug.Log("test flo /// " + dataToLoad.highScore);
+            JSONHighScore.SaveData dataToLoad = JsonConvert.DeserializeObject<JSONHighScore.SaveData>(fileData);
+            Debug.Log(dataToLoad.SaveInfoHighScore[1].playerName);
         }
     }
 
@@ -112,17 +112,38 @@ public class SaberCollision : MonoBehaviour
         // On crée le répertoire
         FileStream fs = File.Create(jsonDirectory + "/test.json");
 
-        JSONHighScore dataToSave = new JSONHighScore();
-        dataToSave.playerName = "Player";
+        //JSONHighScore dataToSave = new JSONHighScore();
+        /*dataToSave.playerName = "Player";
         dataToSave.musicName = "Musique";
-        dataToSave.highScore = GameManager.score.ToString();
+        dataToSave.highScore = GameManager.score.ToString();*/
+
+        JSONHighScore.SaveData saveData = new JSONHighScore.SaveData();
+        saveData.SaveInfoHighScore = new List<JSONHighScore.InfoHighScore>();
+
+        JSONHighScore.InfoHighScore infoHighScore = new JSONHighScore.InfoHighScore(); ;
+
+        infoHighScore.playerName = "Player";
+        infoHighScore.musicName = "Musique";
+        infoHighScore.highScore = GameManager.score.ToString();
+
+        saveData.SaveInfoHighScore.Add(infoHighScore);
+
+
+        infoHighScore.playerName = "test";
+        infoHighScore.musicName = "test";
+        infoHighScore.highScore = GameManager.score.ToString();
+
+        saveData.SaveInfoHighScore.Add(infoHighScore);
 
         // Transformation de l'objet en Json
-        string jsonMusic = JsonConvert.SerializeObject(dataToSave);
+        string jsonMusic = JsonConvert.SerializeObject(saveData);
+
+        Debug.Log("save data " + jsonMusic);
 
         // Sauvegarde du json dans le fichier
         UnicodeEncoding uniEncoding = new UnicodeEncoding();
-        fs.Write(uniEncoding.GetBytes(jsonMusic), 0, uniEncoding.GetByteCount(jsonMusic));
+        fs.Write(uniEncoding.GetBytes(jsonMusic), 0, uniEncoding.GetByteCount(jsonMusic));        
+
         fs.Close();
         exportToJson = false;
     }
