@@ -112,6 +112,7 @@ public class MoveMap : MonoBehaviour
         JsonEntities.NoteToSave noteToSave;
 
         dataToSave.BPM = BeatPerMinute;
+        dataToSave.Time = music.clip.length;
 
         // On enregistre les infos souhaitées de toutes les cibles
         foreach (GameObject target in targets)

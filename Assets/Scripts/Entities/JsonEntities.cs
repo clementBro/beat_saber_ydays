@@ -13,6 +13,7 @@ namespace Assets.Scripts.Entities
         public class DataToSave
         {
             public int BPM { get; set; }
+            public float Time { get; set; }
             public List<NoteToSave> NotesToSave { get; set; }
         }
 
