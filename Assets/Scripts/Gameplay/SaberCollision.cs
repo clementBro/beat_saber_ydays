@@ -67,7 +67,7 @@ public class SaberCollision : MonoBehaviour
 
             // Récupère les infos de la musique
             JSONHighScore.SaveData dataToLoad = JsonConvert.DeserializeObject<JSONHighScore.SaveData>(fileData);
-            Debug.Log(dataToLoad.SaveInfoHighScore[1].playerName);
+            Debug.Log("taille tableau / " + dataToLoad.SaveInfoHighScore.Count);
         }
     }
 
