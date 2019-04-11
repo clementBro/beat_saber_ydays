@@ -720,7 +720,7 @@ PlayerSettings:
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
   cloudProjectId: c0a402db-567e-4fae-b698-02af11502d4f
-  projectName: 
+  projectName: BeatSaber_Ydays
   organizationId: unity_cphjmxzyziucoq
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
