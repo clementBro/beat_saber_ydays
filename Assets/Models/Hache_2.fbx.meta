@@ -1,19 +1,15 @@
 fileFormatVersion: 2
-guid: 750ff3bb190be904eab67ddbd63efd72
+guid: b409c466f89ee6f428de14e0931fceea
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: axe
-    100002: //RootNode
-    100004: transform1
-    400000: axe
-    400002: //RootNode
-    400004: transform1
+    100000: //RootNode
+    400000: //RootNode
     2100000: Metal1
     2100002: Leather
     2100004: Blade
-    2300000: axe
-    3300000: axe
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: axe
   externalObjects: {}
   materials:
@@ -53,7 +49,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
-    swapUVChannels: 1
+    swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
