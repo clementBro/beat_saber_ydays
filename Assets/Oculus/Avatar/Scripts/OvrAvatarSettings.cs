@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 #if UNITY_EDITOR
@@ -9,6 +9,12 @@ public sealed class OvrAvatarSettings : ScriptableObject {
     {
         get { return Instance.ovrAppID; }
         set { Instance.ovrAppID = value; }
+    }
+
+    public static string GearAppID
+    {
+        get { return Instance.ovrGearAppID; }
+        set { Instance.ovrGearAppID = value; }
     }
 
     private static OvrAvatarSettings instance;
@@ -53,4 +59,7 @@ public sealed class OvrAvatarSettings : ScriptableObject {
 
     [SerializeField]
     private string ovrAppID = "";
+
+    [SerializeField]
+    private string ovrGearAppID = "";
 }

@@ -95,13 +95,13 @@ public class ParticleGazeCursor : MonoBehaviour
     void Update()
     {
         // Use delta to change particle effect based on cursor movement speed
-        var delta = GetComponent<OVRGazePointer>().positionDelta;
+        //var delta = GetComponent<OVRGazePointer>().positionDelta;
 
         if (particleTrail)
         {
             // Evaluate these curves to decide the emission rate of the two sources of particles.
-            emHalf.rate = new ParticleSystem.MinMaxCurve(halfEmission.Evaluate((delta.magnitude / Time.deltaTime) / maxSpeed) * emissionScale);
-            emFull.rate = new ParticleSystem.MinMaxCurve(fullEmission.Evaluate((delta.magnitude / Time.deltaTime) / maxSpeed) * emissionScale);
+            //emHalf.rate = new ParticleSystem.MinMaxCurve(halfEmission.Evaluate((delta.magnitude / Time.deltaTime) / maxSpeed) * emissionScale);
+            //emFull.rate = new ParticleSystem.MinMaxCurve(fullEmission.Evaluate((delta.magnitude / Time.deltaTime) / maxSpeed) * emissionScale);
 
             // Make the particles fade out with visibitly the same way the main ring does
             Color color = particleStartColor;
