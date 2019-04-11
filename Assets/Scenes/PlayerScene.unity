@@ -6007,7 +6007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1664806756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6019,7 +6019,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b67a453f1c226341aef83c6c902277b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicTime: 0
 --- !u!4 &1664806757
 Transform:
   m_ObjectHideFlags: 0
@@ -6043,7 +6042,7 @@ GameObject:
   - component: {fileID: 1668854686}
   m_Layer: 0
   m_Name: Chemin
-  m_TagString: Untagged
+  m_TagString: Chemin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8928,6 +8927,18 @@ Prefab:
         type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1540455480831544, guid: 91532ab62f082f2469d5b881989050a0, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511107122207184, guid: 91532ab62f082f2469d5b881989050a0, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1540455480831544, guid: 91532ab62f082f2469d5b881989050a0, type: 2}
+      propertyPath: m_TagString
+      value: Piste
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114821759887322716, guid: 91532ab62f082f2469d5b881989050a0, type: 2}

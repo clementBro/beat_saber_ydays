@@ -14,7 +14,7 @@ namespace Assets.Scripts.Entities
         public class InfoHighScore {
             public string playerName { get; set; }
             public string musicName { get; set; }
-            public string highScore { get; set; }
+            public long highScore { get; set; }
         }
     }
 }

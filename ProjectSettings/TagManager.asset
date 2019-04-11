@@ -10,6 +10,8 @@ TagManager:
   - Combo
   - Rouge
   - Vert
+  - Chemin
+  - Piste
   layers:
   - Default
   - TransparentFX

@@ -18,8 +18,10 @@ public class MoveMap : MonoBehaviour
 
     public bool loadMusicFromJson;
     public string musicName;
+    private float musicTime;
 
     public GameObject prefabNote;
+
 
     /// <summary>
     /// La musique attachée au GameObject
@@ -33,6 +35,8 @@ public class MoveMap : MonoBehaviour
     void Start()
     {
         music = this.GetComponent(typeof(AudioSource)) as AudioSource;
+
+        musicTime = 60;
 
         // Si on veut cacher la grille au démarrage du projet
         if (hideSubGridAtStart)
@@ -83,6 +87,17 @@ public class MoveMap : MonoBehaviour
         {
             this.transform.Translate(Vector3.back * Time.deltaTime * BeatPerMinute * CONSTANT);
         }
+
+        this.musicTime -= Time.deltaTime;
+
+        var Piste = GameObject.FindGameObjectsWithTag("Piste");
+        var Chemin = GameObject.FindGameObjectsWithTag("Chemin");
+        if (this.musicTime <= 0)
+        {
+            Piste[0].active = false;
+            Chemin[0].active = false;
+        }
+
     }
 
     /// <summary>

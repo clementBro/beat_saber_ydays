@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using Assets.Scripts.Entities;
 using System.Text;
 using Newtonsoft.Json;
+using UnityEditor;
 
 public class SaberCollision : MonoBehaviour
 {
@@ -14,8 +15,8 @@ public class SaberCollision : MonoBehaviour
     public Text score;
     public Text combo;
 
-    private bool exportToJson = true;
     private AudioSource music;
+    private JSONHighScore.SaveData dataScore = new JSONHighScore.SaveData();
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -47,10 +48,7 @@ public class SaberCollision : MonoBehaviour
 
         importJson();
 
-        if (exportToJson)
-        {
-            CreateJson();
-        }
+        CreateJson();
     }
 
     private void importJson()
@@ -64,10 +62,8 @@ public class SaberCollision : MonoBehaviour
         } else {
             // Récupère le json de la musique
             string fileData = ReadFileToString(jsonDirectory + "/test.json");
-
             // Récupère les infos de la musique
-            JSONHighScore.SaveData dataToLoad = JsonConvert.DeserializeObject<JSONHighScore.SaveData>(fileData);
-            Debug.Log("taille tableau / " + dataToLoad.SaveInfoHighScore.Count);
+            dataScore = JsonConvert.DeserializeObject<JSONHighScore.SaveData>(fileData);
         }
     }
 
@@ -92,9 +88,9 @@ public class SaberCollision : MonoBehaviour
                 numBytesToRead -= n;
             }
             numBytesToRead = bytes.Length;
-            
+
             UnicodeEncoding uniEncoding = new UnicodeEncoding();
-            
+
             return uniEncoding.GetString(bytes);
         }
     }
@@ -112,31 +108,56 @@ public class SaberCollision : MonoBehaviour
         // On crée le répertoire
         FileStream fs = File.Create(jsonDirectory + "/test.json");
 
-        //JSONHighScore dataToSave = new JSONHighScore();
-        /*dataToSave.playerName = "Player";
-        dataToSave.musicName = "Musique";
-        dataToSave.highScore = GameManager.score.ToString();*/
-
-        JSONHighScore.SaveData saveData = new JSONHighScore.SaveData();
-        saveData.SaveInfoHighScore = new List<JSONHighScore.InfoHighScore>();
-
         JSONHighScore.InfoHighScore infoHighScore = new JSONHighScore.InfoHighScore(); ;
 
         infoHighScore.playerName = "Player";
         infoHighScore.musicName = "Musique";
-        infoHighScore.highScore = GameManager.score.ToString();
+        infoHighScore.highScore = GameManager.score;
 
-        saveData.SaveInfoHighScore.Add(infoHighScore);
+        if (dataScore.SaveInfoHighScore != null)
+        {
+            if (dataScore.SaveInfoHighScore.Count == 10)
+            {
+                if (dataScore.SaveInfoHighScore[0].highScore < (infoHighScore.highScore))
+                {
+                    dataScore.SaveInfoHighScore[0] = infoHighScore;
+                }
+            }
+            else
+            {
+                dataScore.SaveInfoHighScore.Add(infoHighScore);
+            }
+        }
+        else
+        {
+            dataScore.SaveInfoHighScore = new List<JSONHighScore.InfoHighScore>();
+            dataScore.SaveInfoHighScore.Add(infoHighScore);
+        }   
+
+        if (File.Exists(jsonDirectory + "/test.json"))
+        {
+            FileUtil.DeleteFileOrDirectory(jsonDirectory + "/test.json");
+        }
 
 
-        infoHighScore.playerName = "test";
-        infoHighScore.musicName = "test";
-        infoHighScore.highScore = GameManager.score.ToString();
+        // tri par ordre croisssant des scores
+        int n = dataScore.SaveInfoHighScore.Count - 1;
+        for (int i = n; i >= 1; i--)
+        {
+            for (int j = 1; j <= i; j++)
+            {
+                if (dataScore.SaveInfoHighScore[j - 1].highScore > dataScore.SaveInfoHighScore[j].highScore)
+                {
+                    var temp = dataScore.SaveInfoHighScore[j - 1];
+                    dataScore.SaveInfoHighScore[j - 1] = dataScore.SaveInfoHighScore[j];
+                    dataScore.SaveInfoHighScore[j] = temp;
+                }
+            }
+        }
 
-        saveData.SaveInfoHighScore.Add(infoHighScore);
 
         // Transformation de l'objet en Json
-        string jsonMusic = JsonConvert.SerializeObject(saveData);
+        string jsonMusic = JsonConvert.SerializeObject(dataScore);
 
         Debug.Log("save data " + jsonMusic);
 
@@ -145,6 +166,5 @@ public class SaberCollision : MonoBehaviour
         fs.Write(uniEncoding.GetBytes(jsonMusic), 0, uniEncoding.GetByteCount(jsonMusic));        
 
         fs.Close();
-        exportToJson = false;
     }
 }
