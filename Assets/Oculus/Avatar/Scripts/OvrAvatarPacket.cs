@@ -1,27 +1,16 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
-using System;
 
-public class OvrAvatarPacket
-{
-    // Used with SDK driven packet flow
-    public IntPtr ovrNativePacket = IntPtr.Zero;
+public class OvrAvatarPacket {
 
-    // ===============================================================
-    // All code below used for unity only pose blending option.
-    // ===============================================================
     List<float> frameTimes = new List<float>();
     List<OvrAvatarDriver.PoseFrame> frames = new List<OvrAvatarDriver.PoseFrame>();
     List<byte[]> encodedAudioPackets = new List<byte[]>();
 
     public float Duration { get { return frameTimes[frameTimes.Count - 1]; } }
     public OvrAvatarDriver.PoseFrame FinalFrame { get { return frames[frames.Count - 1]; } }
-
-    public OvrAvatarPacket()
-    {
-    }
 
     public OvrAvatarPacket(OvrAvatarDriver.PoseFrame initialPose)
     {
@@ -168,7 +157,7 @@ static class BinaryWriterExtensions
     }
 }
 
-static class BinaryReaderExtensions
+static class BinaryreaderExtensions
 {
     public static OvrAvatarDriver.PoseFrame ReadPoseFrame(this BinaryReader reader)
     {
@@ -198,8 +187,7 @@ static class BinaryReaderExtensions
 
     public static Vector3 ReadVector3(this BinaryReader reader)
     {
-        return new Vector3
-        {
+        return new Vector3 {
             x = reader.ReadSingle(),
             y = reader.ReadSingle(),
             z = reader.ReadSingle()
@@ -208,8 +196,7 @@ static class BinaryReaderExtensions
 
     public static Quaternion ReadQuaternion(this BinaryReader reader)
     {
-        return new Quaternion
-        {
+        return new Quaternion {
             x = reader.ReadSingle(),
             y = reader.ReadSingle(),
             z = reader.ReadSingle(),

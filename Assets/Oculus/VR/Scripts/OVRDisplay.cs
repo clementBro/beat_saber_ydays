@@ -1,57 +1,35 @@
 /************************************************************************************
-Copyright : Copyright (c) Facebook Technologies, LLC and its affiliates. All rights reserved.
 
-Licensed under the Oculus Utilities SDK License Version 1.31 (the "License"); you may not use
-the Utilities SDK except in compliance with the License, which is provided at the time of installation
-or download, or which otherwise accompanies this software in either electronic or hard copy form.
+Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
+
+Licensed under the Oculus VR Rift SDK License Version 3.3 (the "License");
+you may not use the Oculus VR Rift SDK except in compliance with the License,
+which is provided at the time of installation or download, or which
+otherwise accompanies this software in either electronic or hard copy form.
 
 You may obtain a copy of the License at
-https://developer.oculus.com/licenses/utilities-1.31
 
-Unless required by applicable law or agreed to in writing, the Utilities SDK distributed
-under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-ANY KIND, either express or implied. See the License for the specific language governing
-permissions and limitations under the License.
+http://www.oculus.com/licenses/LICENSE-3.3
+
+Unless required by applicable law or agreed to in writing, the Oculus VR SDK
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
 ************************************************************************************/
 
 using System;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using UnityEngine;
-using System.Collections.Generic;
-
-#if UNITY_2017_2_OR_NEWER
-using InputTracking = UnityEngine.XR.InputTracking;
-using Node = UnityEngine.XR.XRNode;
-using NodeState = UnityEngine.XR.XRNodeState;
-using Settings = UnityEngine.XR.XRSettings;
-#elif UNITY_2017_1_OR_NEWER
-using InputTracking = UnityEngine.VR.InputTracking;
-using Node = UnityEngine.VR.VRNode;
-using NodeState = UnityEngine.VR.VRNodeState;
-using Settings = UnityEngine.VR.VRSettings;
-#else
-using Node = UnityEngine.VR.VRNode;
-using Settings = UnityEngine.VR.VRSettings;
-#endif
+using VR = UnityEngine.VR;
 
 /// <summary>
 /// Manages an Oculus Rift head-mounted display (HMD).
 /// </summary>
 public class OVRDisplay
 {
-	/// <summary>
-	/// Contains full fov information per eye
-	/// Under Symmetric Fov mode, UpFov == DownFov and LeftFov == RightFov.
-	/// </summary>
-	public struct EyeFov
-	{
-		public float UpFov;
-		public float DownFov;
-		public float LeftFov;
-		public float RightFov;
-	}
-
 	/// <summary>
 	/// Specifies the size and field-of-view for one eye texture.
 	/// </summary>
@@ -64,16 +42,8 @@ public class OVRDisplay
 
 		/// <summary>
 		/// The angle of the horizontal and vertical field of view in degrees.
-		/// For Symmetric FOV interface compatibility
-		/// Note this includes the fov angle from both sides
 		/// </summary>
 		public Vector2 fov;
-
-		/// <summary>
-		/// The full information of field of view in degrees.
-		/// When Asymmetric FOV isn't enabled, this returns the maximum fov angle
-		/// </summary>
-		public EyeFov fullFov;
 	}
 
 	/// <summary>
@@ -101,8 +71,6 @@ public class OVRDisplay
 
 	private bool needsConfigureTexture;
 	private EyeRenderDesc[] eyeDescs = new EyeRenderDesc[2];
-	private bool recenterRequested = false;
-	private int recenterRequestedFrameCount = int.MaxValue;
 
 	/// <summary>
 	/// Creates an instance of OVRDisplay. Called by OVRManager.
@@ -118,16 +86,6 @@ public class OVRDisplay
 	public void Update()
 	{
 		UpdateTextures();
-
-		if (recenterRequested && Time.frameCount > recenterRequestedFrameCount)
-		{
-			if (RecenteredPose != null)
-			{
-				RecenteredPose();
-			}
-			recenterRequested = false;
-			recenterRequestedFrameCount = int.MaxValue;
-		}
 	}
 
 	/// <summary>
@@ -140,22 +98,12 @@ public class OVRDisplay
 	/// </summary>
 	public void RecenterPose()
 	{
-#if UNITY_2017_2_OR_NEWER
-        UnityEngine.XR.InputTracking.Recenter();
-#else
-		UnityEngine.VR.InputTracking.Recenter();
-#endif
+        VR.InputTracking.Recenter();
 
-		// The current poses are cached for the current frame and won't be updated immediately
-		// after UnityEngine.VR.InputTracking.Recenter(). So we need to wait until next frame
-		// to trigger the RecenteredPose delegate. The application could expect the correct pose
-		// when the RecenteredPose delegate get called.
-		recenterRequested = true;
-		recenterRequestedFrameCount = Time.frameCount;
-
-#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-		OVRMixedReality.RecenterPose();
-#endif
+		if (RecenteredPose != null)
+		{
+			RecenteredPose();
+		}
 	}
 
 	/// <summary>
@@ -163,32 +111,32 @@ public class OVRDisplay
 	/// </summary>
 	public Vector3 acceleration
 	{
-		get {
+		get {			
 			if (!OVRManager.isHmdPresent)
 				return Vector3.zero;
 
-			return OVRNodeStateProperties.GetNodeStateProperty(Node.Head, NodeStatePropertyType.Acceleration, OVRPlugin.Node.Head, OVRPlugin.Step.Render);
-
+            OVRPose ret = OVRPlugin.GetEyeAcceleration(OVRPlugin.Eye.None).ToOVRPose();
+            return ret.position;
 		}
 	}
 
     /// <summary>
-    /// Gets the current angular acceleration of the head in radians per second per second about each axis.
+    /// Gets the current angular acceleration of the head.
     /// </summary>
-    public Vector3 angularAcceleration
+    public Quaternion angularAcceleration
     {
         get
         {
             if (!OVRManager.isHmdPresent)
-				return Vector3.zero;
+                return Quaternion.identity;
 
-			return OVRNodeStateProperties.GetNodeStateProperty(Node.Head, NodeStatePropertyType.AngularAcceleration, OVRPlugin.Node.Head, OVRPlugin.Step.Render);
-
+            OVRPose ret = OVRPlugin.GetEyeAcceleration(OVRPlugin.Eye.None).ToOVRPose();
+            return ret.orientation;
         }
     }
 
     /// <summary>
-    /// Gets the current linear velocity of the head in meters per second.
+    /// Gets the current linear velocity of the head.
     /// </summary>
     public Vector3 velocity
     {
@@ -197,33 +145,29 @@ public class OVRDisplay
             if (!OVRManager.isHmdPresent)
                 return Vector3.zero;
 
-			return OVRNodeStateProperties.GetNodeStateProperty(Node.Head, NodeStatePropertyType.Velocity, OVRPlugin.Node.Head, OVRPlugin.Step.Render);
-
+            OVRPose ret = OVRPlugin.GetEyeVelocity(OVRPlugin.Eye.None).ToOVRPose();
+            return ret.position;
         }
     }
-
+	
 	/// <summary>
-	/// Gets the current angular velocity of the head in radians per second about each axis.
+	/// Gets the current angular velocity of the head.
 	/// </summary>
-	public Vector3 angularVelocity
+	public Quaternion angularVelocity
 	{
 		get {
 			if (!OVRManager.isHmdPresent)
-				return Vector3.zero;
+				return Quaternion.identity;
 
-			return OVRNodeStateProperties.GetNodeStateProperty(Node.Head, NodeStatePropertyType.AngularVelocity, OVRPlugin.Node.Head, OVRPlugin.Step.Render);
-
+			OVRPose ret = OVRPlugin.GetEyeVelocity(OVRPlugin.Eye.None).ToOVRPose();
+			return ret.orientation;
 		}
 	}
 
 	/// <summary>
 	/// Gets the resolution and field of view for the given eye.
 	/// </summary>
-#if UNITY_2017_2_OR_NEWER
-    public EyeRenderDesc GetEyeRenderDesc(UnityEngine.XR.XRNode eye)
-#else
-	public EyeRenderDesc GetEyeRenderDesc(UnityEngine.VR.VRNode eye)
-#endif
+    public EyeRenderDesc GetEyeRenderDesc(VR.VRNode eye)
 	{
 		return eyeDescs[(int)eye];
 	}
@@ -248,24 +192,10 @@ public class OVRDisplay
             {
                 ret.render = float.Parse(match.Groups[1].Value);
                 ret.timeWarp = float.Parse(match.Groups[2].Value);
-                ret.postPresent = float.Parse(match.Groups[3].Value);
+                ret.postPresent = float.Parse(match.Groups[3].Value);     
             }
 
             return ret;
-		}
-	}
-
-	/// <summary>
-	/// Gets application's frame rate reported by oculus plugin
-	/// </summary>
-	public float appFramerate
-	{
-		get
-		{
-			if (!OVRManager.isHmdPresent)
-				return 0;
-
-			return OVRPlugin.GetAppFramerate();
 		}
 	}
 
@@ -280,92 +210,29 @@ public class OVRDisplay
 
 			if (result == 1)
 				result = 0;
-
+			
 			return result;
-		}
-	}
-
-	/// <summary>
-	/// Gets the list of available display frequencies supported by this hardware.
-	/// </summary>
-	public float[] displayFrequenciesAvailable
-	{
-		get { return OVRPlugin.systemDisplayFrequenciesAvailable; }
-	}
-
-	/// <summary>
-	/// Gets and sets the current display frequency.
-	/// </summary>
-	public float displayFrequency
-	{
-		get
-		{
-			return OVRPlugin.systemDisplayFrequency;
-		}
-		set
-		{
-			OVRPlugin.systemDisplayFrequency = value;
 		}
 	}
 
 	private void UpdateTextures()
 	{
-#if UNITY_2017_2_OR_NEWER
-		ConfigureEyeDesc(UnityEngine.XR.XRNode.LeftEye);
-        ConfigureEyeDesc(UnityEngine.XR.XRNode.RightEye);
-#else
-		ConfigureEyeDesc(UnityEngine.VR.VRNode.LeftEye);
-		ConfigureEyeDesc(UnityEngine.VR.VRNode.RightEye);
-#endif
+		ConfigureEyeDesc(VR.VRNode.LeftEye);
+        ConfigureEyeDesc(VR.VRNode.RightEye);
 	}
 
-#if UNITY_2017_2_OR_NEWER
-    private void ConfigureEyeDesc(UnityEngine.XR.XRNode eye)
-#else
-	private void ConfigureEyeDesc(UnityEngine.VR.VRNode eye)
-#endif
+    private void ConfigureEyeDesc(VR.VRNode eye)
 	{
 		if (!OVRManager.isHmdPresent)
 			return;
 
-		int eyeTextureWidth = Settings.eyeTextureWidth;
-		int eyeTextureHeight = Settings.eyeTextureHeight;
+		OVRPlugin.Sizei size = OVRPlugin.GetEyeTextureSize((OVRPlugin.Eye)eye);
+		OVRPlugin.Frustumf frust = OVRPlugin.GetEyeFrustum((OVRPlugin.Eye)eye);
 
-		eyeDescs[(int)eye] = new EyeRenderDesc();
-		eyeDescs[(int)eye].resolution = new Vector2(eyeTextureWidth, eyeTextureHeight);
-
-		OVRPlugin.Frustumf2 frust;
-		if (OVRPlugin.GetNodeFrustum2((OVRPlugin.Node)eye, out frust))
+		eyeDescs[(int)eye] = new EyeRenderDesc()
 		{
-			eyeDescs[(int)eye].fullFov.LeftFov = Mathf.Rad2Deg * Mathf.Atan(frust.Fov.LeftTan);
-			eyeDescs[(int)eye].fullFov.RightFov = Mathf.Rad2Deg * Mathf.Atan(frust.Fov.RightTan);
-			eyeDescs[(int)eye].fullFov.UpFov = Mathf.Rad2Deg * Mathf.Atan(frust.Fov.UpTan);
-			eyeDescs[(int)eye].fullFov.DownFov = Mathf.Rad2Deg * Mathf.Atan(frust.Fov.DownTan);
-		}
-		else
-		{
-			OVRPlugin.Frustumf frustOld = OVRPlugin.GetEyeFrustum((OVRPlugin.Eye)eye);
-			eyeDescs[(int)eye].fullFov.LeftFov = Mathf.Rad2Deg * frustOld.fovX * 0.5f;
-			eyeDescs[(int)eye].fullFov.RightFov = Mathf.Rad2Deg * frustOld.fovX * 0.5f;
-			eyeDescs[(int)eye].fullFov.UpFov = Mathf.Rad2Deg * frustOld.fovY * 0.5f;
-			eyeDescs[(int)eye].fullFov.DownFov = Mathf.Rad2Deg * frustOld.fovY * 0.5f;
-		}
-
-		// Symmetric Fov uses the maximum fov angle
-		float maxFovX = Mathf.Max(eyeDescs[(int)eye].fullFov.LeftFov, eyeDescs[(int)eye].fullFov.RightFov);
-		float maxFovY = Mathf.Max(eyeDescs[(int)eye].fullFov.UpFov, eyeDescs[(int)eye].fullFov.DownFov);
-		eyeDescs[(int)eye].fov.x = maxFovX * 2.0f;
-		eyeDescs[(int)eye].fov.y = maxFovY * 2.0f;
-
-		if (!OVRPlugin.AsymmetricFovEnabled)
-		{
-			eyeDescs[(int)eye].fullFov.LeftFov = maxFovX;
-			eyeDescs[(int)eye].fullFov.RightFov = maxFovX;
-
-			eyeDescs[(int)eye].fullFov.UpFov = maxFovY;
-			eyeDescs[(int)eye].fullFov.DownFov = maxFovY;
-		}
-
-
+			resolution = new Vector2(size.w, size.h),
+            fov = Mathf.Rad2Deg * new Vector2(frust.fovX, frust.fovY),
+		};
 	}
 }

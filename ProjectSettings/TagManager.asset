@@ -4,10 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - SubGrid
-  - Target
-  - Score
-  - Combo
+  - pickupAble
+  - bullet
+  - floor
+  - wall
+  - Fader
+  - dontmove
+  - listlast
   layers:
   - Default
   - TransparentFX
@@ -17,14 +20,14 @@ TagManager:
   - UI
   - 
   - 
-  - PostProcessing
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - NoFadeOut
+  - ColliderGrid
+  - Gazable
+  - Player
+  - LitStairs1
+  - LitStairs2
+  - Wall
+  - TeleportPoints
   - 
   - 
   - 

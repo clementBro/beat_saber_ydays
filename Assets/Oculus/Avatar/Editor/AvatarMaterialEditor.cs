@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 using NUnit.Framework;
 using System.Linq;
@@ -15,7 +15,6 @@ public class AvatarMaterialEditor : MaterialEditor {
     private const string RoughnessPrefix = "ROUGHNESS";
     private const string LayerKeywordPrefix = "LAYERS_";
     private const string AlphaMaskUniform = "_AlphaMask";
-    private const string DarkMultUniform = "_DarkMultiplier";
     private const string BaseColorUniform = "_BaseColor";
     private const string BaseMaskTypeUniform = "_BaseMaskType";
     private const string BaseMaskParametersUniform = "_BaseMaskParameters";
@@ -83,7 +82,7 @@ public class AvatarMaterialEditor : MaterialEditor {
         {
             previewUtility = new PreviewRenderUtility();
             GameObject gameObject = (GameObject)EditorGUIUtility.LoadRequired("Previews/PreviewMaterials.fbx");
-            previewMesh = gameObject.transform.Find("sphere").GetComponent<MeshFilter>().sharedMesh;
+            previewMesh = gameObject.transform.FindChild("sphere").GetComponent<MeshFilter>().sharedMesh;
         }
 
         baseMaskParametersCache[(int)LayerMaskType.Positional] = PositionalMaskDefaults;
@@ -313,7 +312,6 @@ public class AvatarMaterialEditor : MaterialEditor {
         EditorGUILayout.LabelField("Global material properties");
         EditorGUILayout.BeginVertical(EditorStyles.helpBox);
         TextureField("AlphaMask", material, AlphaMaskUniform);
-        AvatarMaterialEditorGUILayout.ColorField("DarkMultiplier", material, DarkMultUniform);
         AvatarMaterialEditorGUILayout.ColorField("BaseColor", material, BaseColorUniform);
         bool normalMapEnabled = AvatarMaterialEditorGUILayout.KeywordToggle("Normal map enabled", material, NormalMapPrefix);
         if (normalMapEnabled)
@@ -356,17 +354,12 @@ public class AvatarMaterialEditor : MaterialEditor {
             Rect layerHeaderRect = GUILayoutUtility.GetRect(previewSize, previewSize, GUILayout.ExpandWidth(true));
 
             // Draw the preview texture
-#if UNITY_2017_1_OR_NEWER
-            Camera cam = previewUtility.camera;
-#else
-            Camera cam = previewUtility.m_Camera;
-#endif
-            cam.transform.position = Vector3.forward * 5.0f;
-            cam.transform.rotation = Quaternion.identity;
-            cam.transform.LookAt(Vector3.zero);
+            previewUtility.m_Camera.transform.position = Vector3.forward * 5.0f;
+            previewUtility.m_Camera.transform.rotation = Quaternion.identity;
+            previewUtility.m_Camera.transform.LookAt(Vector3.zero);
             previewUtility.BeginStaticPreview(new Rect(0, 0, previewSize, previewSize));
             previewUtility.DrawMesh(previewMesh, Vector3.zero, Quaternion.identity, previewMaterials[i], 0);
-            cam.Render();
+            previewUtility.m_Camera.Render();
             Texture preview = previewUtility.EndStaticPreview();
             GUI.Label(new Rect(layerHeaderRect.xMax - previewSize - buttonSize, layerHeaderRect.y, previewSize, previewSize), preview);
 
@@ -523,7 +516,6 @@ public class AvatarMaterialEditor : MaterialEditor {
         Material previewMaterial = new Material(material);
         CopyAttributes(previewMaterial, layerIndex, 0);
         SetLayerCount(previewMaterial, 1);
-        previewMaterial.SetVector(DarkMultUniform, new Vector4(0.6f, 0.6f, 0.6f, 1.0f));
         previewMaterial.SetVector(BaseColorUniform, new Vector4(0.0f, 0.0f, 0.0f, 1.0f));
         previewMaterial.SetTexture(AlphaMaskUniform, EditorGUIUtility.whiteTexture);
         return previewMaterial;

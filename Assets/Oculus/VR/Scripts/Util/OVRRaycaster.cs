@@ -1,17 +1,22 @@
-/************************************************************************************
-Copyright : Copyright (c) Facebook Technologies, LLC and its affiliates. All rights reserved.
+﻿/************************************************************************************
 
-Licensed under the Oculus Utilities SDK License Version 1.31 (the "License"); you may not use
-the Utilities SDK except in compliance with the License, which is provided at the time of installation
-or download, or which otherwise accompanies this software in either electronic or hard copy form.
+Copyright   :   Copyright 2014-Present Oculus VR, LLC. All Rights reserved.
+
+Licensed under the Oculus VR Rift SDK License Version 3.2 (the "License");
+you may not use the Oculus VR Rift SDK except in compliance with the License,
+which is provided at the time of installation or download, or which
+otherwise accompanies this software in either electronic or hard copy form.
 
 You may obtain a copy of the License at
-https://developer.oculus.com/licenses/utilities-1.31
 
-Unless required by applicable law or agreed to in writing, the Utilities SDK distributed
-under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-ANY KIND, either express or implied. See the License for the specific language governing
-permissions and limitations under the License.
+http://www.oculusvr.com/licenses/LICENSE-3.2
+
+Unless required by applicable law or agreed to in writing, the Oculus VR SDK
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
 ************************************************************************************/
 
 using System;
@@ -77,9 +82,9 @@ public class OVRRaycaster : GraphicRaycaster, IPointerEnterHandler
     private List<RaycastHit> m_RaycastResults = new List<RaycastHit>();
     private void Raycast(PointerEventData eventData, List<RaycastResult> resultAppendList, Ray ray, bool checkForBlocking)
     {
-        //This function is closely based on
+        //This function is closely based on 
         //void GraphicRaycaster.Raycast(PointerEventData eventData, List<RaycastResult> resultAppendList)
-
+        
         if (canvas == null)
             return;
 
@@ -170,7 +175,7 @@ public class OVRRaycaster : GraphicRaycaster, IPointerEnterHandler
         }
     }
     /// <summary>
-    /// Performs a raycast using the pointer object attached to this OVRRaycaster
+    /// Performs a raycast using the pointer object attached to this OVRRaycaster 
     /// </summary>
     /// <param name="eventData"></param>
     /// <param name="resultAppendList"></param>
@@ -182,7 +187,7 @@ public class OVRRaycaster : GraphicRaycaster, IPointerEnterHandler
         }
     }
 
-
+   
     /// <summary>
     /// Perform a raycast into the screen and collect all graphics underneath it.
     /// </summary>
@@ -242,7 +247,7 @@ public class OVRRaycaster : GraphicRaycaster, IPointerEnterHandler
 
 
     /// <summary>
-    /// Detects whether a ray intersects a RectTransform and if it does also
+    /// Detects whether a ray intersects a RectTransform and if it does also 
     /// returns the world position of the intersection.
     /// </summary>
     /// <param name="rectTransform"></param>
@@ -301,7 +306,7 @@ public class OVRRaycaster : GraphicRaycaster, IPointerEnterHandler
         OVRInputModule inputModule = EventSystem.current.currentInputModule as OVRInputModule;
         return inputModule && inputModule.activeGraphicRaycaster == this;
     }
-
+    
     public void OnPointerEnter(PointerEventData e)
     {
         if (e.IsVRPointer())

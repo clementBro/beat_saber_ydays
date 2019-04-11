@@ -1,17 +1,22 @@
-/************************************************************************************
-Copyright : Copyright (c) Facebook Technologies, LLC and its affiliates. All rights reserved.
+﻿/************************************************************************************
 
-Licensed under the Oculus Utilities SDK License Version 1.31 (the "License"); you may not use
-the Utilities SDK except in compliance with the License, which is provided at the time of installation
-or download, or which otherwise accompanies this software in either electronic or hard copy form.
+Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
+
+Licensed under the Oculus VR Rift SDK License Version 3.3 (the "License");
+you may not use the Oculus VR Rift SDK except in compliance with the License,
+which is provided at the time of installation or download, or which
+otherwise accompanies this software in either electronic or hard copy form.
 
 You may obtain a copy of the License at
-https://developer.oculus.com/licenses/utilities-1.31
 
-Unless required by applicable law or agreed to in writing, the Utilities SDK distributed
-under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-ANY KIND, either express or implied. See the License for the specific language governing
-permissions and limitations under the License.
+http://www.oculus.com/licenses/LICENSE-3.3
+
+Unless required by applicable law or agreed to in writing, the Oculus VR SDK
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
 ************************************************************************************/
 
 using System.Collections.Generic;
@@ -28,7 +33,7 @@ public class OVRGrabber : MonoBehaviour
     public float grabEnd = 0.35f;
 
     // Demonstrates parenting the held object to the hand's transform when grabbed.
-    // When false, the grabbed object is moved every FixedUpdate using MovePosition.
+    // When false, the grabbed object is moved every FixedUpdate using MovePosition. 
     // Note that MovePosition is required for proper physics simulation. If you set this to true, you can
     // easily observe broken physics simulation by, for example, moving the bottom cube of a stacked
     // tower and noting a complete loss of friction.
@@ -57,10 +62,9 @@ public class OVRGrabber : MonoBehaviour
     protected Vector3 m_anchorOffsetPosition;
     protected float m_prevFlex;
 	protected OVRGrabbable m_grabbedObj = null;
-    protected Vector3 m_grabbedObjectPosOff;
-    protected Quaternion m_grabbedObjectRotOff;
+    Vector3 m_grabbedObjectPosOff;
+    Quaternion m_grabbedObjectRotOff;
 	protected Dictionary<OVRGrabbable, int> m_grabCandidates = new Dictionary<OVRGrabbable, int>();
-	protected bool operatingWithoutOVRCameraRig = true;
 
     /// <summary>
     /// The currently grabbed object.
@@ -82,25 +86,13 @@ public class OVRGrabber : MonoBehaviour
         }
     }
 
-    protected virtual void Awake()
+    void Awake()
     {
         m_anchorOffsetPosition = transform.localPosition;
         m_anchorOffsetRotation = transform.localRotation;
-
-		// If we are being used with an OVRCameraRig, let it drive input updates, which may come from Update or FixedUpdate.
-
-		OVRCameraRig rig = null;
-		if (transform.parent != null && transform.parent.parent != null)
-			rig = transform.parent.parent.GetComponent<OVRCameraRig>();
-
-		if (rig != null)
-		{
-			rig.UpdatedAnchors += (r) => {OnUpdatedAnchors();};
-			operatingWithoutOVRCameraRig = false;
-		}
     }
 
-    protected virtual void Start()
+    void Start()
     {
         m_lastPos = transform.position;
         m_lastRot = transform.rotation;
@@ -119,16 +111,16 @@ public class OVRGrabber : MonoBehaviour
         }
     }
 
-	void FixedUpdate()
-	{
-		if (operatingWithoutOVRCameraRig)
-			OnUpdatedAnchors();
-	}
-
     // Hands follow the touch anchors by calling MovePosition each frame to reach the anchor.
-    // This is done instead of parenting to achieve workable physics. If you don't require physics on
+    // This is done instead of parenting to achieve workable physics. If you don't require physics on 
     // your hands or held objects, you may wish to switch to parenting.
-    void OnUpdatedAnchors()
+    //
+    // BUG: currently (Unity 5.5.0f3.), there's an unavoidable cosmetic issue with
+    // the hand. FixedUpdate must be used, or else physics behavior is wildly erratic.
+    // However, FixedUpdate cannot be guaranteed to run every frame, even when at 90Hz.
+    // On frames where FixedUpdate fails to run, the hand will fail to update its position, causing apparent
+    // judder. A fix is in progress, but not fixable on the user side at this time.
+    void FixedUpdate()
     {
         Vector3 handPos = OVRInput.GetLocalControllerPosition(m_controller);
         Quaternion handRot = OVRInput.GetLocalControllerRotation(m_controller);
@@ -206,7 +198,7 @@ public class OVRGrabber : MonoBehaviour
         }
     }
 
-    protected virtual void GrabBegin()
+    protected void GrabBegin()
     {
         float closestMagSq = float.MaxValue;
 		OVRGrabbable closestGrabbable = null;
@@ -295,7 +287,7 @@ public class OVRGrabber : MonoBehaviour
         }
     }
 
-    protected virtual void MoveGrabbedObject(Vector3 pos, Quaternion rot, bool forceTeleport = false)
+    protected void MoveGrabbedObject(Vector3 pos, Quaternion rot, bool forceTeleport = false)
     {
         if (m_grabbedObj == null)
         {
@@ -327,8 +319,16 @@ public class OVRGrabber : MonoBehaviour
             localPose = localPose * offsetPose;
 
 			OVRPose trackingSpace = transform.ToOVRPose() * localPose.Inverse();
-			Vector3 linearVelocity = trackingSpace.orientation * OVRInput.GetLocalControllerVelocity(m_controller);
-			Vector3 angularVelocity = trackingSpace.orientation * OVRInput.GetLocalControllerAngularVelocity(m_controller);
+			OVRPose localVelocity = new OVRPose() { position = OVRInput.GetLocalControllerVelocity(m_controller), orientation = OVRInput.GetLocalControllerAngularVelocity(m_controller) };
+			Vector3 linearVelocity = trackingSpace.orientation * localVelocity.position;
+			Vector3 angularVelocity = (trackingSpace.orientation * localVelocity.orientation).eulerAngles * Mathf.Deg2Rad;
+
+			if (angularVelocity.x > Mathf.PI)
+				angularVelocity.x -= 2f * Mathf.PI;
+			if (angularVelocity.y > Mathf.PI)
+				angularVelocity.y -= 2f * Mathf.PI;
+			if (angularVelocity.z > Mathf.PI)
+				angularVelocity.z -= 2f * Mathf.PI;
 
             GrabbableRelease(linearVelocity, angularVelocity);
         }
@@ -344,7 +344,7 @@ public class OVRGrabber : MonoBehaviour
         m_grabbedObj = null;
     }
 
-    protected virtual void GrabVolumeEnable(bool enabled)
+    protected void GrabVolumeEnable(bool enabled)
     {
         if (m_grabVolumeEnabled == enabled)
         {
@@ -364,7 +364,7 @@ public class OVRGrabber : MonoBehaviour
         }
     }
 
-	protected virtual void OffhandGrabbed(OVRGrabbable grabbable)
+	protected void OffhandGrabbed(OVRGrabbable grabbable)
     {
         if (m_grabbedObj == grabbable)
         {
