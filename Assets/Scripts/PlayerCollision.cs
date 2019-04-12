@@ -1,26 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCollision : MonoBehaviour {
 
+    
+    public Text combo;
+    
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start () {}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update () {}
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Target")
+        var target = collision.gameObject;
+
+        if (target.tag == "FirstCut" || target.tag == "SecondCut")
         {
+            Destroy(target.transform.parent.gameObject); // Destruction du target
+
+            // Mise à jour du combo
+            GameManager.combo = 1;
+            combo.text = GameManager.combo.ToString();
+
             Debug.Log("Joueur touché");
-            Destroy(collision.gameObject);
-            GameManager.combo = 0;
         }
     }
 }

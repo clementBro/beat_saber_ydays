@@ -26,6 +26,16 @@ TagManager:
   - MenuWeaponLeft2
   - MenuWeaponRight1
   - MenuWeaponRight2
+  - SubGrid
+  - Target
+  - TargetUp
+  - TargetDown
+  - Combo
+  - Score
+  - Rouge
+  - Vert
+  - FirstCut
+  - SecondCut
   layers:
   - Default
   - TransparentFX
