@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,4 +14,9 @@ public class Cube : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    internal static void SetActive(bool v)
+    {
+        throw new NotImplementedException();
+    }
 }
