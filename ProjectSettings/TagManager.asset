@@ -11,6 +11,21 @@ TagManager:
   - Fader
   - dontmove
   - listlast
+  - MenuButtonPlay
+  - MenuButtonHighScore
+  - MenuButtonChooseWeapon
+  - MenuButtonEasy
+  - MenuButtonMedium
+  - MenuButtonHard
+  - MenuButtonWhenGoodPrevail
+  - PanelMainMenu
+  - PanelMenuWeapon
+  - PanelMenuHighScore
+  - MenuWeaponReturnToMenu
+  - MenuWeaponLeft1
+  - MenuWeaponLeft2
+  - MenuWeaponRight1
+  - MenuWeaponRight2
   layers:
   - Default
   - TransparentFX

@@ -9,10 +9,10 @@ public class MainMenuManager : MonoBehaviour
 
     void Start()
     {
-        buttonMusic.onClick.AddListener(ClickMusicAction);
-        buttonEasy.onClick.AddListener(ClickEasyParty);
-        buttonMedium.onClick.AddListener(ClickMediumParty);
-        buttonHard.onClick.AddListener(ClickHardParty);
+        //buttonMusic.onClick.AddListener(ClickMusicAction);
+        //buttonEasy.onClick.AddListener(ClickEasyParty);
+        //buttonMedium.onClick.AddListener(ClickMediumParty);
+        //buttonHard.onClick.AddListener(ClickHardParty);
     }
 
     void Update()
@@ -20,25 +20,25 @@ public class MainMenuManager : MonoBehaviour
         GameParam.ShowConf();
     }
 
-    private void ClickMusicAction()
-    {
-        GameParam.music = 0;
-    }
+    //private void ClickMusicAction()
+    //{
+    //    GameParam.music = 0;
+    //}
 
-    private void ClickEasyParty()
-    {
-        GameParam.gameType = 0;
-    }
+    //private void ClickEasyParty()
+    //{
+    //    GameParam.gameType = 0;
+    //}
 
     
-    private void ClickMediumParty()
-    {
-        GameParam.gameType = 1;
-    }
+    //private void ClickMediumParty()
+    //{
+    //    GameParam.gameType = 1;
+    //}
 
-    private void ClickHardParty()
-    {
-        GameParam.gameType = 2;
-    }
+    //private void ClickHardParty()
+    //{
+    //    GameParam.gameType = 2;
+    //}
 
 }
